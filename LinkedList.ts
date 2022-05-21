@@ -7,7 +7,14 @@ class node<T> {
 	}
 }
 
-class LinkedList<T> {
+interface ILinkedList<T> {
+	append(data: T): void
+	delete(data: T): void
+	search(data: T): node<T> | null
+	traverse(): T[]
+}
+
+class LinkedList<T> implements ILinkedList<T> {
 	head: node<T> | null = null
 
 	constructor() {}
@@ -42,5 +49,32 @@ class LinkedList<T> {
 				current = current.next
 			}
 		}
+
+		previous.next = previous.next ? previous.next.next : null
+	}
+
+	search(data: T): node<T> | null {
+		if (!this.head) return null
+		let current = this.head
+
+		while (current) {
+			if (current.data == data) {
+				return current
+			}
+			current = current.next
+		}
+		return null
+	}
+
+	traverse(): T[] {
+		if (!this.head) return null
+		let current = this.head
+		let resArr: T[] = []
+
+		while (current) {
+			resArr.push(current.data)
+			current = current.next
+		}
+		return null
 	}
 }
