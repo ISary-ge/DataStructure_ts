@@ -1,6 +1,6 @@
-class node<T> {
+class Node<T> {
 	data: T
-	next: node<T> | null = null
+	next: Node<T> | null = null
 
 	constructor(data: T | null) {
 		this.data = data
@@ -10,24 +10,24 @@ class node<T> {
 interface ILinkedList<T> {
 	append(data: T): void
 	delete(data: T): void
-	search(data: T): node<T> | null
+	search(data: T): Node<T> | null
 	traverse(): T[]
 }
 
 class LinkedList<T> implements ILinkedList<T> {
-	head: node<T> | null = null
+	head: Node<T> | null = null
 
 	constructor() {}
 
 	append(data: T): void {
 		if (this.head == null) {
-			this.head = new node<T>(data)
+			this.head = new Node<T>(data)
 		} else {
 			let current = this.head
 			while (current.next !== null) {
 				current = current.next
 			}
-			current.next = new node<T>(data)
+			current.next = new Node<T>(data)
 		}
 	}
 
@@ -53,7 +53,7 @@ class LinkedList<T> implements ILinkedList<T> {
 		previous.next = previous.next ? previous.next.next : null
 	}
 
-	search(data: T): node<T> | null {
+	search(data: T): Node<T> | null {
 		if (!this.head) return null
 		let current = this.head
 
